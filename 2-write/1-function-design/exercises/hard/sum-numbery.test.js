@@ -19,22 +19,27 @@ const mapFilterReduce = (arr) => {
     const castToNumber = (entry) => Number(entry);
 
     // fill in the array methods and pass in the correct logic
-    const sumOfNumberies = arr._(_)._(_)._(_, _);
+    const sumOfNumberies = arr
+        .map((item) => castToNumber(item))
+        .filter((item) => isNotNaN(item))
+        .reduce(sumNumbers, 0);
 
     return sumOfNumberies;
 };
 
 // -------- your solutions --------
 
-for (const solution of [
-    secretSolution,
-    // mapFilterReduce,
-]) {
-    describe(solution.name + ': _', () => {
-        describe('_', () => {
-            it('_', () => {});
-        });
-    });
+for (const solution of [secretSolution, mapFilterReduce]) {
+    describe(
+        solution.name + ': sums all numbery strings in an array of strings',
+        () => {
+            describe('sums all numbery strings in an array of strings', () => {
+                it('["1","2","3","0.5"] --> 6.5', () => {
+                    expect(solution(['1', '2', '3', '0.5'])).toEqual(6.5);
+                });
+            });
+        },
+    );
 }
 
 // minified solution for testing your tests
