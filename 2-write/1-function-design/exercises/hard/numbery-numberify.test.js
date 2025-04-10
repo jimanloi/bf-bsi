@@ -14,12 +14,28 @@
 
 // -------- your solutions --------
 
-for (const solution of [secretSolution]) {
-    describe(solution.name + ': _', () => {
-        describe('_', () => {
-            it('_', () => {});
-        });
-    });
+const mySolution = (arr) => {
+    if (!Array.isArray(arr)) {
+        throw new TypeError('The argument is not an array.');
+    }
+    if (arr.some((a) => typeof a !== 'string')) {
+        throw new TypeError('Elements in the array are not all strings.');
+    }
+    return arr.map((a) => Number(a)).filter((a) => !Number.isNaN(a));
+};
+
+for (const solution of [secretSolution, mySolution]) {
+    describe(
+        solution.name +
+            ': takes an array of strings and returns a new array of numbers',
+        () => {
+            describe('an array of strings', () => {
+                it('["1", "2", "e", "."] --> [1, 2]', () => {
+                    expect(solution(['1', '2', 'e', '.'])).toEqual([1, 2]);
+                });
+            });
+        },
+    );
 }
 
 // minified solution for testing your tests

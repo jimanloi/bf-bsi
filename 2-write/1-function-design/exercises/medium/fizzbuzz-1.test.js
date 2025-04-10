@@ -15,7 +15,26 @@
 
 // -------- your solutions --------
 
-for (const solution of [secretSolution]) {
+const mySolution = (num = 0) => {
+    if (typeof num !== 'number' || isNaN(num)) {
+        throw new TypeError('Expected a number');
+    }
+    if (!Number.isInteger(num)) {
+        throw new RangeError('Expected an integer');
+    }
+    if (num < 0) {
+        throw new RangeError('Number must be >= 0');
+    }
+    return num % 3 === 0 && num % 5 === 0
+        ? 'fizzbuzz'
+        : num % 3 === 0
+        ? 'fizz'
+        : num % 5 === 0
+        ? 'buzz'
+        : num;
+};
+
+for (const solution of [secretSolution, mySolution]) {
     describe(solution.name + ': fizbuzzish', () => {
         describe('default parameter is 0', () => {
             it('returns "fizzbuzz" when no argument is passed', () =>
